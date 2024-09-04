@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вікторина</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Тест на знання</h1>
+        <div id="quiz"></div>
+        <button id="submit">Перевірити відповіді</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Яка столиця України?",
+                answers: {
+                    a: "Київ",
+                    b: "Львів",
+                    c: "Одеса",
+                    d: "Харків"
+                },
+                correctAnswer: "a"
+            },
+            {
+                question: "Скільки областей в Україні?",
+                answers: {
+                    a: "24",
+                    b: "25",
+                    c: "26",
+                    d: "27"
+                },
+                correctAnswer: "a"
+            },
+            {
+                question: "Яка національна валюта України?",
+                answers: {
+                    a: "Долар",
+                    b: "Євро",
+                    c: "Гривня",
+                    d: "Рубль"
+                },
+                correctAnswer: "c"
+            }
+        ];
+
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz');
+            questions.forEach((currentQuestion, questionIndex) => {
+                const answers = Object.entries(currentQuestion.answers)
+                    .map(([key, value]) => `
+                        <label>
+                            <input type="radio" name="question${questionIndex}" value="${key}">
+                            ${value}
+                        </label>
+                    `).join('');
+
+                quizContainer.innerHTML += `
+                    <div class="question">
